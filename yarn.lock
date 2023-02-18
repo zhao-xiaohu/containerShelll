@@ -1539,10 +1539,10 @@
     blueimp-md5 "^2.19.0"
     uuid "^9.0.0"
 
-"@mindverse/container@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.0.8.tgz#ef2c9af0c08d87d0f11fd2375583477bd2627164"
-  integrity sha512-9V+eEilURwy3xRqucJiajMpkpxy2PnIgk1dLKxAhgLV2X+qGFxMHsnp25kntbCI3G7aBN8/2r7ESEnsv6VLGYw==
+"@mindverse/container@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.0.9.tgz#0e98a70c8d4ea13351c62edcebca1e19ffd09f99"
+  integrity sha512-sSRWLWMahSYkSPTOCDaymE84kR0JJ7weHnrRrTr0JB7fpm8/sTzGBqrFHozlJieU1seU+/j9uRZIQeAsBW0jiA==
   dependencies:
     "@mindverse/accessor-open" "^0.4.12"
     showdown "^2.1.0"
