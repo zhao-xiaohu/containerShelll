@@ -1,11 +1,11 @@
 (function () {
+  var isExpand = false;
+  var ifrmSrc =
+    "https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com";
   var ifrm;
   window.addEventListener("load", function () {
     ifrm = document.createElement("iframe");
-    ifrm.setAttribute(
-      "src",
-      "https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com/"
-    );
+    ifrm.setAttribute("src", ifrmSrc);
     ifrm.style.width = `${window.innerWidth}px`;
     ifrm.style.height = `${window.innerHeight}px`;
     ifrm.style.zIndex = 9999999999;
@@ -17,17 +17,38 @@
   });
 
   window.addEventListener("message", function (e) {
-    console.log("Francis, messsage", e, e.origin);
+    if (e.origin === ifrmSrc) {
+      console.log("Francis, message", e, e.origin, e.data);
+      var data = e.data;
+      if (data.startsWith("MV_CONTAINER_EVENT_IS_EXPAND.")) {
+        var isExpandStr = data.split(".")[1];
+        if (isExpandStr === "false") {
+          isExpand = false;
+        } else if (isExpandStr === "true") {
+          isExpand = true;
+        }
+        resizeIframe();
+        ifrm.postMessage("MV_CONTAINER_EVENT_RESIZE_IFRAME", "*")
+      }
+    }
   });
 
-  window.addEventListener("resize", (event) => {
+  function resizeIframe() {
     var isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      ifrm.style.width = `${window.innerWidth}px`;
-      ifrm.style.height = `${window.innerHeight}px`;
+    if (!isExpand) {
+      ifrm.style.width = `117px`;
+      ifrm.style.height = `140px`;
     } else {
-      ifrm.style.width = `${400}px`;
-      ifrm.style.height = `${600}px`;
+      if (isMobile) {
+        ifrm.style.width = `${window.innerWidth}px`;
+        ifrm.style.height = `${window.innerHeight}px`;
+      } else {
+        ifrm.style.width = `${400}px`;
+        ifrm.style.height = `${600}px`;
+      }
     }
+  }
+  window.addEventListener("resize", (event) => {
+    resizeIframe();
   });
 })();
