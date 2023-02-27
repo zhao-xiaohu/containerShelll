@@ -1,7 +1,6 @@
 (function () {
   var ifrm;
   window.addEventListener("load", function () {
-    console.log("Francis window load");
     ifrm = document.createElement("iframe");
     ifrm.setAttribute(
       "src",
@@ -15,21 +14,10 @@
     ifrm.style.right = "0px";
     ifrm.style.border = "none";
     document.body.appendChild(ifrm);
+  });
 
-    console.log("Francis ifrm.contentWindow", ifrm.contentWindow)
-    ifrm.contentWindow.addEventListener(
-      "MV_CONTAINER_EVENT_IS_EXPAND",
-      function (e) {
-        console.log("Francis");
-        if (e.detail === true) {
-          // 展开
-          console.log("Francis open");
-        } else if (e.detail === false) {
-          // 收缩
-          console.log("Francis close");
-        }
-      }
-    );
+  window.addEventListener("message", function (e) {
+    console.log("Francis, messsage", e, e.origin);
   });
 
   window.addEventListener("resize", (event) => {
