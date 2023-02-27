@@ -8,7 +8,7 @@ export default function Container(props) {
   const refUserId = "shitou";
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: "100vw", height: "96vh" }}>
       <App
         sessionCb={(_sessionId) => {}}
         config={{
@@ -41,6 +41,7 @@ export default function Container(props) {
             avatar:
               "https://cdn.mindverse.com/img/zzzz202302211676948571901%E5%BF%83%E8%AF%86%E5%BC%95%E5%AF%BC%E5%91%98.png",
           },
+          dynamicHeight: false,
         }}
       />
     </div>
