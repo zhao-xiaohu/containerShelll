@@ -28,7 +28,9 @@
           isExpand = true;
         }
         resizeIframe();
-        ifrm.postMessage("MV_CONTAINER_EVENT_RESIZE_IFRAME", "*")
+        this.setTimeout(() => {
+          ifrm.postMessage("MV_CONTAINER_EVENT_RESIZE_IFRAME", "*");
+        }, 5000);
       }
     }
   });
