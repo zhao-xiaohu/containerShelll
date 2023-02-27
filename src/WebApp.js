@@ -1,33 +1,14 @@
 /**
  * 业务接入样例
  */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import App from "@mindverse/container";
 
 export default function Container(props) {
-  const [isMobile, setIsMobile] = useState(false);
-
   const refUserId = "shitou";
 
-  useEffect(() => {
-    const resize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", resize);
-    resize();
-    return () => {
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
   return (
-    <div
-      style={
-        isMobile
-          ? { width: "100vw", height: "80vh" }
-          : { width: "400px", height: "600px" }
-      }
-    >
+    <div style={{ width: "100vw", height: "100vh" }}>
       <App
         sessionCb={(_sessionId) => {}}
         config={{
