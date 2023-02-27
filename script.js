@@ -1,5 +1,4 @@
 (function () {
-  var MARGIN_TOP = 24;
   var ifrm;
   window.addEventListener("load", function () {
     console.log("window load");
@@ -16,6 +15,19 @@
     ifrm.style.right = "0px";
     ifrm.style.border = "none";
     document.body.appendChild(ifrm);
+
+    ifrm.contentWindow.addEventListener(
+      "MV_CONTAINER_EVENT_IS_EXPAND",
+      function (e) {
+        if (e.detail === true) {
+          // 展开
+          console.log("expand");
+        } else if (e.detail === false) {
+          // 收缩
+          console.log("close");
+        }
+      }
+    );
   });
 
   window.addEventListener("resize", (event) => {
