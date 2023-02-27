@@ -13,7 +13,7 @@ function App() {
     }
     var ifrm;
     window.addEventListener("load", function () {
-      console.log("window load");
+      console.log("Francis window load");
       ifrm = document.createElement("iframe");
       ifrm.setAttribute(
         "src",
@@ -28,11 +28,11 @@ function App() {
       ifrm.style.border = "none";
       document.body.appendChild(ifrm);
   
-      console.log("Francis", ifrm.contentWindow)
+      console.log("Francis ifrm.contentWindow", ifrm.contentWindow)
       ifrm.contentWindow.addEventListener(
         "MV_CONTAINER_EVENT_IS_EXPAND",
         function (e) {
-          console
+          console.log("Francis");
           if (e.detail === true) {
             // 展开
             console.log("Francis open");
