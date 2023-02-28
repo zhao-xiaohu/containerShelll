@@ -8,7 +8,7 @@ export default function Container(props) {
   const refUserId = "shitou";
 
   return (
-    <div style={{ width: "100vw", height: "96vh" }}>
+    <div style={{ width: "100vw", height: "95vh" }}>
       <App
         sessionCb={(_sessionId) => {}}
         config={{

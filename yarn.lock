@@ -1508,10 +1508,10 @@
     blueimp-md5 "^2.19.0"
     uuid "^9.0.0"
 
-"@mindverse/container@^1.1.11":
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.1.11.tgz#5303e8347baadc7c52b14eca2b166cb987db038a"
-  integrity sha512-piZwB6P4Ayrae3TmmhOltFGlsK8BKFF/G77FwPBl7/kKDk8LjDskjqj9Pb88PqETxrwzulKxK59XZWEWccloQQ==
+"@mindverse/container@^1.1.14":
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.1.14.tgz#29ead62f488ad88ecd2d3998752a5934f59541ea"
+  integrity sha512-+gL+zlQsAVWNm4Z9O2eXbWs4xjcfuc8DlTw0XEey0+nt1YWJjyDcRrGZvlKhcKcCjJznX2tOWVjpVGxvrCQp3Q==
   dependencies:
     "@mindverse/accessor-open" "^0.5.4"
     showdown "^2.1.0"
