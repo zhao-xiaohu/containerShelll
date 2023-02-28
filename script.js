@@ -4,6 +4,7 @@
     "https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com";
   var ifrm;
   window.addEventListener("load", function () {
+    console.log("Francis load changed!", window.location.href);
     ifrm = document.createElement("iframe");
     ifrm.setAttribute("src", ifrmSrc);
     ifrm.style.width = `${window.innerWidth}px`;
@@ -28,10 +29,6 @@
           isExpand = true;
         }
         resizeIframe();
-        this.setTimeout(() => {
-          // error
-          // ifrm.postMessage("MV_CONTAINER_EVENT_RESIZE_IFRAME", "*");
-        }, 5000);
       }
     }
   });

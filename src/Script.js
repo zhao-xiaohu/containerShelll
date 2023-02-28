@@ -14,6 +14,7 @@ function App() {
       "https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com";
     var ifrm;
     window.addEventListener("load", function () {
+      console.log("Francis load changed!", window.location.href);
       ifrm = document.createElement("iframe");
       ifrm.setAttribute("src", ifrmSrc);
       ifrm.style.width = `${window.innerWidth}px`;
@@ -25,7 +26,7 @@ function App() {
       ifrm.style.border = "none";
       document.body.appendChild(ifrm);
     });
-
+  
     window.addEventListener("message", function (e) {
       if (e.origin === ifrmSrc) {
         console.log("Francis, message", e, e.origin, e.data);
@@ -41,7 +42,7 @@ function App() {
         }
       }
     });
-
+  
     function resizeIframe() {
       var isMobile = window.innerWidth <= 768;
       if (!isExpand) {
