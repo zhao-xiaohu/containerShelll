@@ -1,54 +1,54 @@
 (function () {
   var isExpand = false;
-  var ifrmSrc =
-    "https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com";
-  var ifrm;
-  window.addEventListener("load", function () {
-    console.log("Francis load changed!", window.location.href);
-    ifrm = document.createElement("iframe");
-    ifrm.setAttribute("src", ifrmSrc);
-    ifrm.style.width = `${window.innerWidth}px`;
-    ifrm.style.height = `${window.innerHeight}px`;
-    ifrm.style.zIndex = 9999999999;
-    ifrm.style.position = "fixed";
-    ifrm.style.bottom = "0px";
-    ifrm.style.right = "0px";
-    ifrm.style.border = "none";
-    document.body.appendChild(ifrm);
-  });
-
-  window.addEventListener("message", function (e) {
-    if (e.origin === ifrmSrc) {
-      console.log("Francis, message", e, e.origin, e.data);
-      var data = e.data;
-      if (data.startsWith("MV_CONTAINER_EVENT_IS_EXPAND.")) {
-        var isExpandStr = data.split(".")[1];
-        if (isExpandStr === "false") {
-          isExpand = false;
-        } else if (isExpandStr === "true") {
-          isExpand = true;
+    var ifrmSrc =
+      "https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com";
+    var ifrm;
+    window.addEventListener("load", function () {
+      console.log("Francis load changed!", window.location.href);
+      ifrm = document.createElement("iframe");
+      ifrm.setAttribute("src", ifrmSrc);
+      ifrm.style.width = `${window.innerWidth}px`;
+      ifrm.style.height = `${window.innerHeight}px`;
+      ifrm.style.zIndex = 9999999999;
+      ifrm.style.position = "fixed";
+      ifrm.style.bottom = "0px";
+      ifrm.style.right = "0px";
+      ifrm.style.border = "none";
+      document.body.appendChild(ifrm);
+    });
+  
+    window.addEventListener("message", function (e) {
+      if (e.origin === ifrmSrc) {
+        console.log("Francis, message", e, e.origin, e.data);
+        var data = e.data;
+        if (data.startsWith("MV_CONTAINER_EVENT_IS_EXPAND.")) {
+          var isExpandStr = data.split(".")[1];
+          if (isExpandStr === "false") {
+            isExpand = false;
+          } else if (isExpandStr === "true") {
+            isExpand = true;
+          }
+          resizeIframe();
         }
-        resizeIframe();
       }
-    }
-  });
-
-  function resizeIframe() {
-    var isMobile = window.innerWidth <= 768;
-    if (!isExpand) {
-      ifrm.style.width = `117px`;
-      ifrm.style.height = `140px`;
-    } else {
-      if (isMobile) {
-        ifrm.style.width = `${window.innerWidth}px`;
-        ifrm.style.height = `${window.innerHeight}px`;
+    });
+  
+    function resizeIframe() {
+      var isMobile = window.innerWidth <= 768;
+      if (!isExpand) {
+        ifrm.style.width = `117px`;
+        ifrm.style.height = `400px`;
       } else {
-        ifrm.style.width = `${400}px`;
-        ifrm.style.height = `${600}px`;
+        if (isMobile) {
+          ifrm.style.width = `${window.innerWidth}px`;
+          ifrm.style.height = `${window.innerHeight}px`;
+        } else {
+          ifrm.style.width = `${400}px`;
+          ifrm.style.height = `${600}px`;
+        }
       }
     }
-  }
-  window.addEventListener("resize", (event) => {
-    resizeIframe();
-  });
+    window.addEventListener("resize", (event) => {
+      resizeIframe();
+    });
 })();
