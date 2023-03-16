@@ -41,7 +41,7 @@ export default function Container(props) {
           },
           userConfig: {
             userName: "shitou-demo",
-            avatar:
+            picture:
               "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
           },
           dynamicHeight: false,

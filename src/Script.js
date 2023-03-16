@@ -47,7 +47,7 @@ function App() {
       var isMobile = window.innerWidth <= 768;
       if (!isExpand) {
         ifrm.style.width = `117px`;
-        ifrm.style.height = `140px`;
+        ifrm.style.height = `400px`;
       } else {
         if (isMobile) {
           ifrm.style.width = `${window.innerWidth}px`;
