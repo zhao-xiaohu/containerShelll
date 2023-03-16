@@ -29,7 +29,6 @@ function App() {
   
     window.addEventListener("message", function (e) {
       if (e.origin === ifrmSrc) {
-        console.log("Francis, message", e, e.origin, e.data);
         var data = e.data;
         if (data.startsWith("MV_CONTAINER_EVENT_IS_EXPAND.")) {
           var isExpandStr = data.split(".")[1];
@@ -46,8 +45,8 @@ function App() {
     function resizeIframe() {
       var isMobile = window.innerWidth <= 768;
       if (!isExpand) {
-        ifrm.style.width = `117px`;
-        ifrm.style.height = `400px`;
+        ifrm.style.width = `400px`;
+        ifrm.style.height = `140px`;
       } else {
         if (isMobile) {
           ifrm.style.width = `${window.innerWidth}px`;
