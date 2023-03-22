@@ -1518,10 +1518,10 @@
     lodash "^4.17.21"
     three "^0.124.0"
 
-"@mindverse/container@^1.4.26":
-  version "1.4.26"
-  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.4.26.tgz#761eca87239ee53b1d82382a3882dbedc49922c5"
-  integrity sha512-DlNNah+x/B2untMKLnBCP/ZIEE5+eCHXR6gcHqbICC+PDUg7SYDeKXo4VYkcw3qH8SpaMpxU7UpVYO/5+OhGxA==
+"@mindverse/container@^1.4.31":
+  version "1.4.31"
+  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.4.31.tgz#9ccae8b15ab2646b6fa74fe76943b02e5bb7f55b"
+  integrity sha512-7KLMG+vefWgqlvVp75jubgGX+RMb4fDdcBpSD2kQtqc1tm7SeuwR5WgYPcbcaCufewiqdaycqdHJqVamcqILUg==
   dependencies:
     "@mindverse/accessor-open" "^0.5.14"
     "@mindverse/avatar" "^1.1.13"
@@ -4336,6 +4336,11 @@ find-up@^5.0.0:
   dependencies:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
+
+fingerprintjs2@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/fingerprintjs2/-/fingerprintjs2-2.1.4.tgz#a39deb947aa187c098306a0b5dd41ceaa2e15fc5"
+  integrity sha512-veP2yVsnYvjDVkzZMyIEwpqCAQfsBLH+U4PK5MlFAnLjZrttbdRqEArE1fPcnJFz5oS5CrdONbsV7J6FGpIJEQ==
 
 flat-cache@^3.0.4:
   version "3.0.4"
