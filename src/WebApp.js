@@ -2,52 +2,107 @@
  * 业务接入样例
  */
 import App, { DevelopType } from "@mindverse/container";
+import { useEffect, useState } from "react";
+import request from "./request";
 
 export default function Container(props) {
-  const refUserId = "shitou";
+  // ?merchantId=c1dxw&appId=os_aa93da4a-1c60-4ef1-aab9-17b3a1fb5af3&mindId=40128313284497408
+  // <script src="https://front-img-1309544882.cos.ap-shanghai.myqcloud.com/container/script.js" defer>c1dxw,os_aa93da4a-1c60-4ef1-aab9-17b3a1fb5af3,40128313284497408</script>
 
-  return (
-    <div style={{ width: "100vw", height: "95vh" }}>
-      <App
-        sessionCb={(_sessionId) => {}}
-        config={{
-          mindConfig: {
-            mindId: "81870359162392576", // pre
-            // mindId: '76643513529405440', // test
-            mindType: "original",
-          },
-          socketConfig: {
-            apiVersion: "1.3.0",
-            platform: "web",
-            appId: "os_54b9f83c-58e2-4e32-8cc8-b1dcb872c0aa", // pre
-            // appId: 'os_742e9fcd-d543-4c99-94d7-404119bea18a', // test
-            bizType: "",
-            merchantId: "c1dyf", // pre
-            // merchantId: 'c1e3x', // test
-            mAuthType: "STATION_KEY",
+  // 解析 URL 对象
+  const url = new URL(window.location.href);
+  // 取得查询字符串参数
+  const params = new URLSearchParams(url.search);
 
-            refUserId,
+  // 获取指定参数的值
+  const merchantId = params.get("merchantId");
+  const appId = params.get("appId");
+  const mindId = params.get("mindId");
 
-            merchantBaseURL: "https://gateway-pre.mindverse.com", // pre
-            // merchantBaseURL: 'https://gateway-test.mindverse.com', // test
-            merchantSocketPath: "/chat/rest/general/ws/create",
-            merchantSessionOpenPath: "/chat/rest/general/session/create",
-            merchantSessionClosePath: "/chat/rest/general/session/close",
-            merchantUserRegisterPath: "/chat/rest/general/user/register",
-            merchantSocketCheckPath: "/chat/rest/general/ws/get",
-            merchantSessionCheckPath: "/chat/rest/general/session/get",
+  const [avatarInfo, setAvatarInfo] = useState({
+    avatar: "",
+    model: "",
+  });
 
-            headers: {},
-          },
-          userConfig: {
-            userName: "shitou-demo",
-            picture:
-              "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
-          },
-          dynamicHeight: false,
-          developType: DevelopType.SCRIPT,
-        }}
-      />
-    </div>
-  );
+  useEffect(() => {
+    if (merchantId && appId && mindId) {
+      request({
+        url: "/chat/rest/general/mind/get/config/by/mind",
+        method: "post",
+        data: { mindId },
+        headers: {
+          AuthType: "STATION_KEY",
+          merchantId,
+          platform: "web",
+          appId,
+        },
+      })
+        .then((res) => {
+          if (res.data?.code === 0 && res.data?.data) {
+            setAvatarInfo({
+              avatar: res.data.data.avatarInfo?.avatar,
+              model: res.data.data.avatarInfo?.model,
+              mindName: res.data.data.mindName,
+            });
+          } else {
+            alert(JSON.stringify(res.data.message));
+          }
+        })
+        .catch((e) => {
+          alert(e);
+        });
+    } else {
+      alert("url params error");
+    }
+  }, []);
+
+  if (
+    merchantId &&
+    avatarInfo &&
+    (avatarInfo.avatar || avatarInfo.model) &&
+    avatarInfo.mindName
+  ) {
+    return (
+      <div style={{ width: "100vw", height: "95vh" }}>
+        <App
+          sessionCb={(_sessionId) => {}}
+          config={{
+            mindConfig: {
+              mindId,
+              mindType: "original",
+            },
+            socketConfig: {
+              apiVersion: "1.3.0",
+              platform: "web",
+              appId,
+              bizType: "",
+              merchantId,
+              mAuthType: "STATION_KEY",
+
+              refUserId: "shitou",
+
+              merchantBaseURL: "https://gateway-pre.mindverse.com",
+              merchantSocketPath: "/chat/rest/general/ws/create",
+              merchantSessionOpenPath: "/chat/rest/general/session/create",
+              merchantSessionClosePath: "/chat/rest/general/session/close",
+              merchantUserRegisterPath: "/chat/rest/general/user/register",
+              merchantSocketCheckPath: "/chat/rest/general/ws/get",
+              merchantSessionCheckPath: "/chat/rest/general/session/get",
+
+              headers: {},
+            },
+            userConfig: {
+              userName: avatarInfo.mindName,
+              picture: avatarInfo.avatar,
+              model: avatarInfo.model,
+            },
+            dynamicHeight: false,
+            developType: DevelopType.SCRIPT,
+          }}
+        />
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
