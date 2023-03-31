@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import request from "./request";
 
 export default function Container(props) {
-  
   // 解析 URL 对象
   const url = new URL(window.location.href);
   // 取得查询字符串参数
@@ -23,6 +22,8 @@ export default function Container(props) {
     model: "",
   });
 
+  // ?host=https://gateway-test.mindverse.com&merchantId=c1dxs&appId=os_9f86530d-838a-4301-b873-ec5f0e3ce4b8&mindId=91530602754478080
+  // <script src="https://front-img-1309544882.cos.ap-shanghai.myqcloud.com/container/script.js" defer>https://gateway-test.mindverse.com,c1dxs,os_9f86530d-838a-4301-b873-ec5f0e3ce4b8,91530602754478080</script>
   useEffect(() => {
     if (host && merchantId && appId && mindId) {
       request({
@@ -57,6 +58,7 @@ export default function Container(props) {
   }, []);
 
   if (
+    host && 
     merchantId &&
     avatarInfo &&
     (avatarInfo.avatar || avatarInfo.model) &&
@@ -81,7 +83,7 @@ export default function Container(props) {
 
               refUserId: "shitou",
 
-              merchantBaseURL: "https://gateway-pre.mindverse.com",
+              merchantBaseURL: host,
               merchantSocketPath: "/chat/rest/general/ws/create",
               merchantSessionOpenPath: "/chat/rest/general/session/create",
               merchantSessionClosePath: "/chat/rest/general/session/close",
