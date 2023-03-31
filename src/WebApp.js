@@ -6,15 +6,14 @@ import { useEffect, useState } from "react";
 import request from "./request";
 
 export default function Container(props) {
-  // ?merchantId=c1dxw&appId=os_aa93da4a-1c60-4ef1-aab9-17b3a1fb5af3&mindId=40128313284497408
-  // <script src="https://front-img-1309544882.cos.ap-shanghai.myqcloud.com/container/script.js" defer>c1dxw,os_aa93da4a-1c60-4ef1-aab9-17b3a1fb5af3,40128313284497408</script>
-
+  
   // 解析 URL 对象
   const url = new URL(window.location.href);
   // 取得查询字符串参数
   const params = new URLSearchParams(url.search);
 
   // 获取指定参数的值
+  const host = params.get("host");
   const merchantId = params.get("merchantId");
   const appId = params.get("appId");
   const mindId = params.get("mindId");
@@ -25,8 +24,9 @@ export default function Container(props) {
   });
 
   useEffect(() => {
-    if (merchantId && appId && mindId) {
+    if (host && merchantId && appId && mindId) {
       request({
+        baseURL: host,
         url: "/chat/rest/general/mind/get/config/by/mind",
         method: "post",
         data: { mindId },

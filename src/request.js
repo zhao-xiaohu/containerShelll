@@ -15,9 +15,6 @@ const service = axios.create({
 // 链式拦截器, 处理个性化
 service.interceptors.request.use(
   (config) => {
-    config.baseURL = "https://gateway-test.mindverse.com";
-    if (config.headers) {
-    }
     return config;
   },
   (error) => {
