@@ -74,10 +74,25 @@ export default function Container(props) {
   }, []);
 
   useEffect(() => {
-    const browserId = localStorage.getItem("browserId");
-    if (browserId) {
-      setRefUserId(browserId);
+    if (localStorage) {
+      console.log("OK localStorage");
+      const browserId = localStorage.getItem("browserId");
+      if (browserId) {
+        setRefUserId(browserId);
+      } else {
+        getFinger((finger) => {
+          localStorage.setItem("browserId", finger);
+          setRefUserId(finger);
+        });
+      }
     } else {
+      console.error("No localStorage");
+      getFinger((finger) => {
+        setRefUserId(finger);
+      });
+    }
+
+    const getFinger = (callback) => {
       // 选择哪些信息作为浏览器指纹生成的依据
       const options = {
         fonts: {
@@ -91,14 +106,13 @@ export default function Container(props) {
         },
       };
       // 浏览器指纹
-      const fingerprint = Fingerprint2.get(options, (components) => {
+      Fingerprint2.get(options, (components) => {
         // 参数只有回调函数或者options为{}时，默认浏览器指纹依据所有配置信息进行生成
         const values = components.map((component) => component.value); // 配置的值的数组
         const murmur = Fingerprint2.x64hash128(values.join(""), 31); // 生成浏览器指纹
-        localStorage.setItem("browserId", murmur); // 存储浏览器指纹，在项目中用于校验用户身份和埋点
-        setRefUserId(murmur);
+        callback && callback(murmur);
       });
-    }
+    };
   }, []);
 
   if (
