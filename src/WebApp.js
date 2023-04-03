@@ -12,15 +12,28 @@ export default function Container(props) {
   const params = new URLSearchParams(url.search);
 
   // 获取指定参数的值
-  const host = params.get("host");
-  const merchantId = params.get("merchantId");
-  const appId = params.get("appId");
-  const mindId = params.get("mindId");
+  const host = params.get("host") || "https://gateway-pre.mindverse.com";
+  const merchantId = params.get("merchantId") || "c1dyf";
+  const appId =
+    params.get("appId") || "os_54b9f83c-58e2-4e32-8cc8-b1dcb872c0aa";
+  const mindId = params.get("mindId") || "81870359162392576";
 
   const [avatarInfo, setAvatarInfo] = useState({
-    avatar: "",
+    mindName: "shitou-demo",
+    avatar:
+      "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
     model: "",
   });
+
+  const setDefault = () => {
+    console.error("url params error, go default");
+    setAvatarInfo({
+      mindName: "shitou-demo",
+      avatar:
+        "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
+      model: "",
+    });
+  };
 
   // ?host=https://gateway-test.mindverse.com&merchantId=c1dxs&appId=os_9f86530d-838a-4301-b873-ec5f0e3ce4b8&mindId=91530602754478080
   // <script src="https://front-img-1309544882.cos.ap-shanghai.myqcloud.com/container/script.js" defer>https://gateway-test.mindverse.com,c1dxs,os_9f86530d-838a-4301-b873-ec5f0e3ce4b8,91530602754478080</script>
@@ -46,20 +59,18 @@ export default function Container(props) {
               mindName: res.data.data.mindName,
             });
           } else {
-            alert(JSON.stringify(res.data.message));
+            setDefault();
           }
         })
         .catch((e) => {
-          alert(e);
+          setDefault();
         });
     } else {
-      alert("url params error");
+      setDefault();
     }
   }, []);
 
   if (
-    host && 
-    merchantId &&
     avatarInfo &&
     (avatarInfo.avatar || avatarInfo.model) &&
     avatarInfo.mindName
