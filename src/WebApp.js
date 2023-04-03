@@ -4,9 +4,74 @@
 import App, { DevelopType } from "@mindverse/container";
 import Fingerprint2 from "fingerprintjs2"; // 引入fingerprintjs2
 import { useEffect, useState } from "react";
+import request from "./request";
 
 export default function Container(props) {
   const [refUserId, setRefUserId] = useState("");
+
+  // 解析 URL 对象
+  const url = new URL(window.location.href);
+  // 取得查询字符串参数
+  const params = new URLSearchParams(url.search);
+
+  // 获取指定参数的值
+  const host = params.get("host") || "https://gateway-pre.mindverse.com";
+  const merchantId = params.get("merchantId") || "c1dyf";
+  const appId =
+    params.get("appId") || "os_54b9f83c-58e2-4e32-8cc8-b1dcb872c0aa";
+  const mindId = params.get("mindId") || "81870359162392576";
+
+  const [avatarInfo, setAvatarInfo] = useState({
+    mindName: "shitou-demo",
+    avatar:
+      "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
+    model: "",
+  });
+
+  const setDefault = () => {
+    console.error("url params error, go default");
+    setAvatarInfo({
+      mindName: "shitou-demo",
+      avatar:
+        "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
+      model: "",
+    });
+  };
+
+  // ?host=https://gateway-test.mindverse.com&merchantId=c1dxs&appId=os_9f86530d-838a-4301-b873-ec5f0e3ce4b8&mindId=91530602754478080
+  // <script src="https://front-img-1309544882.cos.ap-shanghai.myqcloud.com/container/script.js" defer>https://gateway-test.mindverse.com,c1dxs,os_9f86530d-838a-4301-b873-ec5f0e3ce4b8,91530602754478080</script>
+  useEffect(() => {
+    if (host && merchantId && appId && mindId) {
+      request({
+        baseURL: host,
+        url: "/chat/rest/general/mind/get/config/by/mind",
+        method: "post",
+        data: { mindId },
+        headers: {
+          AuthType: "STATION_KEY",
+          merchantId,
+          platform: "web",
+          appId,
+        },
+      })
+        .then((res) => {
+          if (res.data?.code === 0 && res.data?.data) {
+            setAvatarInfo({
+              avatar: res.data.data.avatarInfo?.avatar,
+              model: res.data.data.avatarInfo?.model,
+              mindName: res.data.data.mindName,
+            });
+          } else {
+            setDefault();
+          }
+        })
+        .catch((e) => {
+          setDefault();
+        });
+    } else {
+      setDefault();
+    }
+  }, []);
 
   useEffect(() => {
     const browserId = localStorage.getItem("browserId");
@@ -36,31 +101,32 @@ export default function Container(props) {
     }
   }, []);
 
-  if (refUserId) {
+  if (
+    refUserId &&
+    avatarInfo &&
+    (avatarInfo.avatar || avatarInfo.model) &&
+    avatarInfo.mindName
+  ) {
     return (
       <div style={{ width: "100vw", height: "95vh" }}>
         <App
           sessionCb={(_sessionId) => {}}
           config={{
             mindConfig: {
-              mindId: "81870359162392576", // pre
-              // mindId: '76643513529405440', // test
+              mindId,
               mindType: "original",
             },
             socketConfig: {
               apiVersion: "1.3.0",
               platform: "web",
-              appId: "os_54b9f83c-58e2-4e32-8cc8-b1dcb872c0aa", // pre
-              // appId: 'os_742e9fcd-d543-4c99-94d7-404119bea18a', // test
+              appId,
               bizType: "",
-              merchantId: "c1dyf", // pre
-              // merchantId: 'c1e3x', // test
+              merchantId,
               mAuthType: "STATION_KEY",
 
               refUserId: refUserId,
 
-              merchantBaseURL: "https://gateway-pre.mindverse.com", // pre
-              // merchantBaseURL: 'https://gateway-test.mindverse.com', // test
+              merchantBaseURL: host,
               merchantSocketPath: "/chat/rest/general/ws/create",
               merchantSessionOpenPath: "/chat/rest/general/session/create",
               merchantSessionClosePath: "/chat/rest/general/session/close",
@@ -71,9 +137,9 @@ export default function Container(props) {
               headers: {},
             },
             userConfig: {
-              userName: "shitou-demo",
-              picture:
-                "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
+              userName: avatarInfo.mindName,
+              picture: avatarInfo.avatar,
+              model: avatarInfo.model,
             },
             dynamicHeight: false,
             developType: DevelopType.SCRIPT,
