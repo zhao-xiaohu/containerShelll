@@ -53,17 +53,19 @@ function App() {
           });
 
           function resizeIframe() {
-            var isMobile = window.innerWidth <= 768;
-            if (!isExpand) {
-              ifrm.style.width = `400px`;
-              ifrm.style.height = `140px`;
-            } else {
-              if (isMobile) {
-                ifrm.style.width = `${window.innerWidth}px`;
-                ifrm.style.height = `${window.innerHeight}px`;
+            if (ifrm) {
+              var isMobile = window.innerWidth <= 768;
+              if (!isExpand) {
+                ifrm.style.width = `400px`;
+                ifrm.style.height = `140px`;
               } else {
-                ifrm.style.width = `${400}px`;
-                ifrm.style.height = `${600}px`;
+                if (isMobile) {
+                  ifrm.style.width = `${window.innerWidth}px`;
+                  ifrm.style.height = `${window.innerHeight}px`;
+                } else {
+                  ifrm.style.width = `${400}px`;
+                  ifrm.style.height = `${600}px`;
+                }
               }
             }
           }
