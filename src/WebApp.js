@@ -73,9 +73,31 @@ export default function Container(props) {
     }
   }, []);
 
+  const getFinger = (callback) => {
+    // 选择哪些信息作为浏览器指纹生成的依据
+    const options = {
+      fonts: {
+        extendedJsFonts: true,
+      },
+      excludes: {
+        audio: true,
+        userAgent: true,
+        enumerateDevices: true,
+        touchSupport: true,
+      },
+    };
+    // 浏览器指纹
+    Fingerprint2.get(options, (components) => {
+      // 参数只有回调函数或者options为{}时，默认浏览器指纹依据所有配置信息进行生成
+      const values = components.map((component) => component.value); // 配置的值的数组
+      const murmur = Fingerprint2.x64hash128(values.join(""), 31); // 生成浏览器指纹
+      callback && callback(murmur);
+    });
+  };
+
   useEffect(() => {
     if (localStorage) {
-      console.log("OK localStorage");
+      console.log("OK localStorage.");
       const browserId = localStorage.getItem("browserId");
       if (browserId) {
         setRefUserId(browserId);
@@ -86,33 +108,11 @@ export default function Container(props) {
         });
       }
     } else {
-      console.error("No localStorage");
+      console.error("No localStorage.");
       getFinger((finger) => {
         setRefUserId(finger);
       });
     }
-
-    const getFinger = (callback) => {
-      // 选择哪些信息作为浏览器指纹生成的依据
-      const options = {
-        fonts: {
-          extendedJsFonts: true,
-        },
-        excludes: {
-          audio: true,
-          userAgent: true,
-          enumerateDevices: true,
-          touchSupport: true,
-        },
-      };
-      // 浏览器指纹
-      Fingerprint2.get(options, (components) => {
-        // 参数只有回调函数或者options为{}时，默认浏览器指纹依据所有配置信息进行生成
-        const values = components.map((component) => component.value); // 配置的值的数组
-        const murmur = Fingerprint2.x64hash128(values.join(""), 31); // 生成浏览器指纹
-        callback && callback(murmur);
-      });
-    };
   }, []);
 
   if (
