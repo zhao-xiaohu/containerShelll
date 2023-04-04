@@ -1,9 +1,6 @@
-import { useEffect, useRef } from "react";
-
-let fired = false;
-
 function App() {
   (function () {
+    var { Readability } = require("@mozilla/readability");
     var isExpand = false;
     var ifrmSrc = `https://containershelll-1ggubuwee5576817-1309544882.ap-shanghai.app.tcloudbase.com`;
     var ifrm;
@@ -19,14 +16,16 @@ function App() {
       ifrm.style.right = "0px";
       ifrm.style.border = "none";
       document.body.appendChild(ifrm);
+
+      var documentClone = document.cloneNode(true);
+      var article = new Readability(documentClone).parse();
+      console.log("Readability：", article);
     });
 
     window.addEventListener("message", function (e) {
-      console.log("iframe message0", data)
       if (e.origin === ifrmSrc) {
         var data = e.data;
         if (data.startsWith("MV_CONTAINER_EVENT_IS_EXPAND.")) {
-          console.log("iframe message1", data)
           var isExpandStr = data.split(".")[1];
           if (isExpandStr === "false") {
             isExpand = false;
