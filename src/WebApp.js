@@ -23,9 +23,8 @@ export default function Container(props) {
   const mindId = params.get("mindId") || "81870359162392576";
 
   const [avatarInfo, setAvatarInfo] = useState({
-    mindName: "shitou-demo",
-    avatar:
-      "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
+    mindName: "",
+    avatar: "",
     model: "",
   });
 
