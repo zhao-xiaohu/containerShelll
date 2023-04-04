@@ -26,9 +26,11 @@
         });
 
         window.addEventListener("message", function (e) {
+          console.log("iframe message0", data);
           if (e.origin === ifrmSrc) {
             var data = e.data;
             if (data.startsWith("MV_CONTAINER_EVENT_IS_EXPAND.")) {
+              console.log("iframe message1", data);
               var isExpandStr = data.split(".")[1];
               if (isExpandStr === "false") {
                 isExpand = false;

@@ -4,7 +4,6 @@
 import App, { DevelopType } from "@mindverse/container";
 import Fingerprint2 from "fingerprintjs2"; // 引入fingerprintjs2
 import { useEffect, useRef, useState } from "react";
-import { Readability } from "@mozilla/readability";
 import request from "./request";
 
 export default function Container(props) {
@@ -73,33 +72,6 @@ export default function Container(props) {
     } else {
       setDefault();
     }
-  }, []);
-
-  // 监听 parent window
-  useEffect(() => {
-    // iframe
-    window.addEventListener("message", (event) => {
-      // 可以检查event.origin以验证发送方的来源，以增加安全性
-      if (event.data.startsWith("popstate")) {
-        const newUrl = event.data.split(".")[1];
-        console.log("newUrl", newUrl, window.mainDocument);
-        if (newUrl !== parentUrlRef.current) {
-          parentUrlRef.current = newUrl;
-          request({
-            baseURL: `https://gateway-test.mindverse.com`,
-            url: '/chat/rest/general/session/env/page/push',
-            method: 'post',
-            data,
-          })
-            .then((res) => {
-              console.log("bbb", res)
-            })
-            .catch((res) => {
-              console.log("aaa", e)
-            });
-        }
-      }
-    });
   }, []);
 
   const getFinger = (callback) => {
