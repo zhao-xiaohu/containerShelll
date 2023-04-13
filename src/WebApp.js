@@ -123,11 +123,9 @@ export default function Container(props) {
       style.innerHTML = `
         .${uniqueClassName}::-webkit-scrollbar {
           width: 0;
+          height: 0;
           background: none;
-        }
-    
-        .${uniqueClassName}::-webkit-scrollbar-thumb {
-          background: none;
+          display: none;
         }
       `;
       document.head.appendChild(style);
