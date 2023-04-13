@@ -115,6 +115,27 @@ export default function Container(props) {
     }
   }, []);
 
+  useEffect(() => {
+    const uniqueClassName = "hidden-scrollbar";
+    
+    if (!document.querySelector(`.${uniqueClassName}`)) {
+      const style = document.createElement("style");
+      style.innerHTML = `
+        .${uniqueClassName}::-webkit-scrollbar {
+          width: 0;
+          background: none;
+        }
+    
+        .${uniqueClassName}::-webkit-scrollbar-thumb {
+          background: none;
+        }
+      `;
+      document.head.appendChild(style);
+      const element = document.getElementsByTagName(`body`);
+      element[0].classList.add(uniqueClassName);
+    }
+  },[])
+
   if (
     refUserId &&
     avatarInfo &&
