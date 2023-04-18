@@ -36,6 +36,7 @@ export default function Container(props) {
       avatar:
         "https://cdn.mindverse.com/img/zzzz202304111681207263197%E5%A5%B38.png",
       model: "",
+      type: "pictureModel",
     });
   };
 
@@ -185,15 +186,15 @@ export default function Container(props) {
               type: avatarInfo.type,
             },
             openStyle: {
-              position: 'fixed',
+              position: "fixed",
             },
             closeStyle: {
-              position: 'fixed',
+              position: "fixed",
             },
             avatarStyle: {
-              position: 'fixed',
-              right: '0px',
-              bottom: '0px',
+              position: "fixed",
+              right: "0px",
+              bottom: "0px",
             },
             dynamicHeight: false,
             developType: DevelopType.SCRIPT,
