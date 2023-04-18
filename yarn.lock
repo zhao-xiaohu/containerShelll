@@ -1568,32 +1568,32 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@mindverse/accessor-open@^0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@mindverse/accessor-open/-/accessor-open-0.7.3.tgz#0cfcfa68b342935320edfaf311f94c630962c8bb"
-  integrity sha512-cTnVj4pBM/wMxNApdlMbDwEzKtmfCra2BebuNgTPLQpFvYnDHzJ4sGgDxtEaYYYBfSvK82jn28hFjp8wVhWSVQ==
+"@mindverse/accessor-open@^0.7.4":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@mindverse/accessor-open/-/accessor-open-0.7.4.tgz#80598c945c241f9e5634d0d4277e5d9ec9c79fa0"
+  integrity sha512-mdU22dis6+DxXpQ7M0SN8EY4kA3DcTxtCtDNffWqNcKg9Dz5zDqmhHhS4v1CMZ3u5f4vajWajYNbHyD9Nu1prw==
   dependencies:
     axios "^0.27.2"
     blueimp-md5 "^2.19.0"
     uuid "^9.0.0"
 
-"@mindverse/avatar@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@mindverse/avatar/-/avatar-1.2.4.tgz#6846590b5afe5ac635a93f913b719b2825fff585"
-  integrity sha512-Lj35fhYbLqXa1mkhZwmyNFX+Wwo6g61E7VgBOTXD+qmDNPeNubJhVfjR13UaZuZhe+a+P57xRVra0VUNkHbuGQ==
+"@mindverse/avatar@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@mindverse/avatar/-/avatar-1.2.5.tgz#9d610535bb49bb43f9fc631fb689dc2ae84ca6de"
+  integrity sha512-AerLbghl4qesd69gAWJKxYdSRydb8ZOdXItPtcDgKY0cAs1+q9NPKaJqNGHKs/P3ZWEYSZJzYb7LbJgJefsWWg==
   dependencies:
     "@tweenjs/tween.js" "^18.6.4"
     axios "^0.27.2"
     lodash "^4.17.21"
     three "^0.124.0"
 
-"@mindverse/container@^1.7.16":
-  version "1.7.16"
-  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.7.16.tgz#368686cd0a93a7de71856228936933a00df27b8b"
-  integrity sha512-HpRGd258zPdrZU8DUa5OeJPiKxpE0vYSxvhRU4QPufi0zJIjOXyunDfIHeux1Pin42lM0yzFfC7msRWmSsyajQ==
+"@mindverse/container@^1.8.24":
+  version "1.8.24"
+  resolved "https://registry.yarnpkg.com/@mindverse/container/-/container-1.8.24.tgz#95f30b1f4bbee278faa5b12e721f057cad073d91"
+  integrity sha512-2zX2VP9KsZb5AOQh/KVslYz1QJ6fxWWP9Fz9+JIhzvz+f0MY//ejlAZcutq0gnSHBWYXHu37zI0QZl2e97n1nw==
   dependencies:
-    "@mindverse/accessor-open" "^0.7.3"
-    "@mindverse/avatar" "^1.2.4"
+    "@mindverse/accessor-open" "^0.7.4"
+    "@mindverse/avatar" "^1.2.5"
     "@vespaiach/axios-fetch-adapter" "^0.3.1"
     antd "5.2.1"
     js-audio-recorder "^1.0.7"

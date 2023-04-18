@@ -16,30 +16,38 @@ export default function Container(props) {
   const params = new URLSearchParams(url.search);
 
   // 获取指定参数的值
-  const host = params.get("host") || "https://gateway-pre.mindverse.com";
-  const merchantId = params.get("merchantId") || "c1dyf";
+  const host = params.get("host") || "https://mindos.us.mindverse.ai/gate";
+  const merchantId = params.get("merchantId") || "c1dyy";
   const appId =
-    params.get("appId") || "os_54b9f83c-58e2-4e32-8cc8-b1dcb872c0aa";
-  const mindId = params.get("mindId") || "81870359162392576";
+    params.get("appId") || "os_6749495f-ae3c-4f87-9233-f233d670e3dc";
+  const mindId = params.get("mindId") || "97858626479329280";
 
   const [avatarInfo, setAvatarInfo] = useState({
     mindName: "",
     avatar: "",
     model: "",
+    type: "",
   });
 
   const setDefault = () => {
     console.error("url params error, go default");
     setAvatarInfo({
-      mindName: "shitou-demo",
+      mindName: "Angela",
       avatar:
-        "https://cdn.mindverse.com/files/zzzz20230308167826913484720230308-175144.gif",
+        "https://cdn.mindverse.com/img/zzzz202304111681207263197%E5%A5%B38.png",
       model: "",
     });
   };
 
-  // ?host=https://gateway-test.mindverse.com&merchantId=c1dxs&appId=os_9f86530d-838a-4301-b873-ec5f0e3ce4b8&mindId=91530602754478080
-  // <script src="https://front-img-1309544882.cos.ap-shanghai.myqcloud.com/container/script.js" defer>https://gateway-test.mindverse.com,c1dxs,os_9f86530d-838a-4301-b873-ec5f0e3ce4b8,91530602754478080</script>
+  // ?host=https://mindos.us.mindverse.ai/gate&merchantId=c1dyy&appId=os_6749495f-ae3c-4f87-9233-f233d670e3dc&mindId=97858626479329280
+  // <script id="mv-client-messenger-widget" src="https://cdn.mindverse.com/container/script.js" defer>https://mindos.us.mindverse.ai/gate,c1dyy,os_6749495f-ae3c-4f87-9233-f233d670e3dc,97858626479329280</script>
+  <script
+    id="mv-client-messenger-widget"
+    src="https://cdn.mindverse.com/container/script.js"
+    defer
+  >
+    https://mindos.us.mindverse.ai/gate,c1dyy,os_6749495f-ae3c-4f87-9233-f233d670e3dc,97858626479329280
+  </script>;
   useEffect(() => {
     if (host && merchantId && appId && mindId) {
       request({
@@ -59,6 +67,7 @@ export default function Container(props) {
             setAvatarInfo({
               avatar: res.data.data.avatarInfo?.avatar,
               model: res.data.data.avatarInfo?.model,
+              type: res.data.data.avatarInfo.type,
               mindName: res.data.data.mindName,
             });
           } else {
@@ -117,7 +126,7 @@ export default function Container(props) {
 
   useEffect(() => {
     const uniqueClassName = "hidden-scrollbar";
-    
+
     if (!document.querySelector(`.${uniqueClassName}`)) {
       const style = document.createElement("style");
       style.innerHTML = `
@@ -132,7 +141,7 @@ export default function Container(props) {
       const element = document.getElementsByTagName(`body`);
       element[0].classList.add(uniqueClassName);
     }
-  },[])
+  }, []);
 
   if (
     refUserId &&
@@ -173,6 +182,18 @@ export default function Container(props) {
               userName: avatarInfo.mindName,
               picture: avatarInfo.avatar,
               model: avatarInfo.model,
+              type: avatarInfo.type,
+            },
+            openStyle: {
+              position: 'fixed',
+            },
+            closeStyle: {
+              position: 'fixed',
+            },
+            avatarStyle: {
+              position: 'fixed',
+              right: '0px',
+              bottom: '0px',
             },
             dynamicHeight: false,
             developType: DevelopType.SCRIPT,
