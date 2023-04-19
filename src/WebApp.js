@@ -194,7 +194,7 @@ export default function Container(props) {
             avatarStyle: {
               position: "fixed",
               right: "0px",
-              bottom: "0px",
+              bottom: "6px",
             },
             dynamicHeight: false,
             developType: DevelopType.SCRIPT,
