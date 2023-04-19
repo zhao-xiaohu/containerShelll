@@ -27,6 +27,7 @@ export default function Container(props) {
     avatar: "",
     model: "",
     type: "",
+    gender: "",
   });
 
   const setDefault = () => {
@@ -70,6 +71,7 @@ export default function Container(props) {
               model: res.data.data.avatarInfo?.model,
               type: res.data.data.avatarInfo.type,
               mindName: res.data.data.mindName,
+              gender: res.data.data.avatarInfo?.gender,
             });
           } else {
             setDefault();
@@ -184,6 +186,7 @@ export default function Container(props) {
               picture: avatarInfo.avatar,
               model: avatarInfo.model,
               type: avatarInfo.type,
+              gender: avatarInfo.gender,
             },
             openStyle: {
               position: "fixed",
