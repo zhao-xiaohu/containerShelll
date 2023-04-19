@@ -201,6 +201,7 @@ export default function Container(props) {
             },
             dynamicHeight: false,
             developType: DevelopType.SCRIPT,
+            isPC: false,
           }}
         />
       </div>
