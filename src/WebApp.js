@@ -5,6 +5,7 @@ import App, { DevelopType } from "@mindverse/container";
 import Fingerprint2 from "fingerprintjs2"; // 引入fingerprintjs2
 import { useEffect, useRef, useState } from "react";
 import request from "./request";
+import { browserType } from "./util";
 
 export default function Container(props) {
   const [refUserId, setRefUserId] = useState("");
@@ -146,6 +147,8 @@ export default function Container(props) {
     }
   }, []);
 
+  const isMob = browserType() === "mob";
+
   if (
     refUserId &&
     avatarInfo &&
@@ -153,7 +156,7 @@ export default function Container(props) {
     avatarInfo.mindName
   ) {
     return (
-      <div style={{ width: "100vw", height: "80vh" }}>
+      <div style={{ width: "100vw", height: isMob ? "60vh" : "80vh" }}>
         <App
           sessionCb={(_sessionId) => {}}
           config={{
